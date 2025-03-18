@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev:test": "node --test test/*/*.js",
+    "dev:test:integration": "node --test test/integration/*.js",
+    "dev:test:unit":"node --test test/unit/*.js",
     "dev": "node --watch src/server.js"
   },
   "type": "module",
