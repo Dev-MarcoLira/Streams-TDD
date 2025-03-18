@@ -60,7 +60,10 @@ describe('API User Routes', () =>{
         })
 
 
-        strictEqual(response.status, 200)
+        strictEqual(
+            response.status, 
+            200
+        )
         response = await response.json()
         deepStrictEqual(response, { message: 'logged in' })
     })
@@ -101,7 +104,11 @@ describe('API User Routes', () =>{
             }
         })
 
-        strictEqual(response.status, 200)
+        strictEqual(
+            response.status, 
+            201,
+            'The status should be 201 - Created'
+        )
         response = await response.json()
         deepStrictEqual(response, { message: 'ok' })
     })
