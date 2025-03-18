@@ -1,5 +1,5 @@
 import express from "express";
-//import UserRepository from '../repository/UserRepository.js'
+import UserRepository from '../repository/UserRepository.js'
 
 const VALID = {
     name: 'Marco Antonio',
@@ -35,8 +35,10 @@ router.post('/login', (req, res) =>{
 
 })
 
-router.get('/stream', (req, res) =>{
-    res.send({ message: 'streamed content'} )
+router.get('/users/all', (req, res) =>{
+    
+
+
 })
 
 export default router
