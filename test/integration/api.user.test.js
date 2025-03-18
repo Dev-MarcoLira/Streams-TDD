@@ -1,8 +1,10 @@
 import { describe, it } from 'node:test'
 import { ok, deepEqual, deepStrictEqual, strictEqual } from 'node:assert'
 
-import { BASE_URL } from '../util.js'
+import { integration } from '../util.js'
 import { spawn } from 'node:child_process';
+
+const { BASE_URL } = integration
 
 const server = spawn('node', ['../../src/server.js'], {
     stdio: 'ignore',
