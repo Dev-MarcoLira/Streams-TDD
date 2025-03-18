@@ -1,4 +1,4 @@
-import { describe, it } from 'node:test'
+import { after, describe, it } from 'node:test'
 import { ok, deepEqual, deepStrictEqual, strictEqual } from 'node:assert'
 
 import { integration } from '../util.js'
@@ -12,6 +12,10 @@ const server = spawn('node', ['../../src/server.js'], {
   });
 
 describe('API User Routes', () =>{
+
+    after(() =>{
+        server.kill()
+    })
 
     // Home
     it('should return ok', async() =>{

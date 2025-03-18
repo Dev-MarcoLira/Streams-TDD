@@ -1,5 +1,5 @@
 import { ok, strictEqual } from "node:assert";
-import { describe, it } from "node:test";
+import { after, describe, it } from "node:test";
 
 import { integration } from '../util.js'
 import { spawn } from 'node:child_process';
@@ -12,6 +12,10 @@ const server = spawn('node', ['../../src/server.js'], {
   });
 
 describe('API Stream Routes', () => {
+    
+    after(() =>{
+        server.kill()
+    })
 
     it('should stream content correctly', async() =>{
 
