@@ -3,7 +3,7 @@ import { config } from 'dotenv'
 config()
 
 const PORT = process.env.PORT
-const server = express()
+export const server = express()
 
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
@@ -16,7 +16,7 @@ const VALID = {
 
 server.get('/', (req, res) =>{
 
-    res.send('ok')
+    res.send({ message: 'ok' })
 
 })
 
@@ -46,4 +46,12 @@ server.post('/login', (req, res) =>{
 
 })
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+server.get('/stream', (req, res) =>{
+    res.send({ message: 'streamed content'} )
+})
+
+if(import.meta.url === `file://${process.cwd()}/server.js`){
+    server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+}else{
+    server.listen(process.env.PORT_TEST, () => console.log(`Server running on port ${PORT}`))
+}
