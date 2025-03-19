@@ -1,7 +1,6 @@
 import express from "express";
-import UserRepository from '../repository/UserRepository.js'
-import path from "node:path";
-import { fileURLToPath } from 'url';
+import UserService from "../service/UserService.js";
+
 
 const VALID = {
     name: 'Marco Antonio',
@@ -39,28 +38,14 @@ router.post('/login', (req, res) =>{
 
 router.get('/users/all', (req, res) =>{
     
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const fileStream = UserRepository.streamAll(path.join(__dirname, '..', 'database', 'MOCK_DATA.json'))
-
     res.setHeader('Content-Type', 'application/json')
-    fileStream.pipe(res)
+    res.setHeader('Transfer-Encoding', 'chuncked')
 
-    fileStream.on('error', (err) => {
+    const userService = new UserService()
 
-        console.log(`Error streaming the file: ${err}`)
-        res.status(500).send({ error: 'Internal Server Error' })
-
-    })
-
-    res.on('close', () =>{
-        fileStream.destroy()
-    })
-
-    // Log to verify the stream starts (optional)
-    fileStream.on('data', (chunk) => {
-        console.log('Streaming data chunk...');
-    });
+    userService.streamAll(res)
+        .then(() => res.end())
+        .catch((err) => res.send({ error: err.message}))
 
 })
 

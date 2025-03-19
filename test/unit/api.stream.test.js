@@ -23,6 +23,7 @@ describe('API Streaming Routes test suite', () => {
 
         response = await response.json()
         deepStrictEqual(response.error, undefined)
+        
         ok(response.hasOwnProperty('id'))
         ok(response.hasOwnProperty('name'))
         ok(response.hasOwnProperty('password'))
