@@ -17,12 +17,10 @@ export default class UserService {
         const readline = this.userRepository.streamAll(datasource, res)
 
         return new Promise((resolve, reject) => {
-
+         
             readline.on('line', (line) => res.write(line + '\n'))
     
-            readline.on('close', () => {
-                resolve()
-            })
+            readline.on('close', () => resolve())
     
             readline.on('error', (err) => reject(new Error((`Error reading the file: ${err.message}`))))
             
